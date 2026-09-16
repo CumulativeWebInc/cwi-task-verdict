@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task Verdict — CWI Agent Deck #39</title>
+<meta name="description" content="Turn any delegated task's claims into checkable receipts. Evidence-bound checks, machine-readable verdict records.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="crown">👑</span>
+    <div>
+      <h1 data-i18n="title">Task Verdict</h1>
+      <p class="sub" data-i18n="subtitle">Agent Deck #39 · orchestration receipts — make every claim checkable</p>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="run" role="tab" data-i18n="tab_run">Run</button>
+    <button class="tab" data-tab="assemble" role="tab" data-i18n="tab_assemble">Assemble</button>
+    <button class="tab" data-tab="limits" role="tab" data-i18n="tab_limits">Honest limits</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ============ RUN ============ -->
+  <section id="tab-run" class="panel active" role="tabpanel">
+    <div class="banner" data-i18n="browser_note">
+      Browser run: URL checks execute live. File checks need the CLI
+      (<code>node cli/verify.js manifest.json</code>) — the browser cannot read local files, and says so instead of faking it.
+    </div>
+
+    <div class="verdict-card hidden" id="verdictCard">
+      <div class="verdict-head">
+        <span class="verdict-badge" id="verdictBadge">—</span>
+        <div class="verdict-meta">
+          <div class="verdict-title" id="verdictTitle">—</div>
+          <div class="verdict-sub" id="verdictSub">—</div>
+        </div>
+        <div class="verdict-counts" id="verdictCounts"></div>
+      </div>
+      <div class="verdict-actions">
+        <button id="btnDownload" data-i18n="download">Download verdict JSON</button>
+        <button id="btnCopyLink" data-i18n="copy_link">Copy share link</button>
+      </div>
+    </div>
+
+    <div class="checks-list" id="checksList" aria-live="polite"></div>
+
+    <details class="manifest-box" open>
+      <summary data-i18n="manifest_label">Task manifest (cwi.task-verdict/1.0)</summary>
+      <div class="manifest-toolbar">
+        <button id="btnTemplateUrl" data-i18n="tpl_url">+ URL check template</button>
+        <button id="btnTemplateFile" data-i18n="tpl_file">+ file check template</button>
+        <button id="btnExample" data-i18n="load_example">Load dogfood example</button>
+        <label class="filebtn"><span data-i18n="open_file">Open file…</span><input type="file" id="fileInput" accept=".json,application/json" hidden></label>
+      </div>
+      <textarea id="manifestInput" spellcheck="false" rows="18"></textarea>
+      <div class="row">
+        <button id="btnValidate" class="primary" data-i18n="validate">Validate manifest</button>
+        <button id="btnRun" class="primary go" data-i18n="run_checks">Run checks</button>
+        <span class="msg" id="manifestMsg" aria-live="polite"></span>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============ ASSEMBLE ============ -->
+  <section id="tab-assemble" class="panel" role="tabpanel">
+    <h2 data-i18n="assemble_h">Build a manifest without hand-writing JSON</h2>
+    <p class="muted" data-i18n="assemble_p">Fill the claim, add checks row by row, then ship the manifest into the Run tab — or straight to the CLI.</p>
+    <div class="form-grid">
+      <label><span data-i18n="f_task">task_id</span><input id="aTaskId" placeholder="tv_ship_39"></label>
+      <label><span data-i18n="f_title">title</span><input id="aTitle" placeholder="Shipped product #39"></label>
+      <label><span data-i18n="f_claim">claim (plain language)</span><input id="aClaim" placeholder="The live page serves and the engine is byte-identical"></label>
+      <label><span data-i18n="f_by">claimed_by</span><input id="aBy" placeholder="agent:CWI_Results"></label>
+    </div>
+    <h3 data-i18n="checks_h">Checks</h3>
+    <div id="checkRows"></div>
+    <button id="btnAddCheck" data-i18n="add_check">+ Add check</button>
+    <div class="row">
+      <button id="btnBuild" class="primary" data-i18n="build_manifest">Build manifest → Run tab</button>
+      <span class="msg" id="assembleMsg" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <!-- ============ LIMITS ============ -->
+  <section id="tab-limits" class="panel" role="tabpanel">
+    <h2 data-i18n="limits_h">What a verdict proves — and what it doesn't</h2>
+    <ul class="limits">
+      <li><strong>PASS</strong> <span data-i18n="l1">proves the listed checks passed at run time. It does not prove the task was good, complete, or honest — only that its receipts checked out.</span></li>
+      <li><strong>FAIL</strong> <span data-i18n="l2">means at least one check's observed evidence contradicted the claim. The evidence is in the record — argue with the evidence, not the badge.</span></li>
+      <li><strong>PARTIAL</strong> <span data-i18n="l3">means something could not be verified (network error, timeout, CORS block). Unverifiable is reported as unverifiable — never rounded up to a pass.</span></li>
+      <li><span data-i18n="l4">URL checks in the browser are subject to CORS: a site that blocks cross-origin reads will ERROR here and PASS in the CLI. The CLI is the authority for URL checks.</span></li>
+      <li><span data-i18n="l5">File checks are sandboxed to one base directory. Paths that escape it are rejected and reported as ERROR — never silently read.</span></li>
+      <li><span data-i18n="l6">This is heuristic triage for orchestration claims, in the spirit of the Trust Fabric: receipts over assertions, evidence over adjectives.</span></li>
+    </ul>
+    <h3 data-i18n="check_types">Check types</h3>
+    <table class="types">
+      <tr><th>type</th><th data-i18n="th_proves">proves</th></tr>
+      <tr><td><code>url_status</code></td><td data-i18n="t_url_status">a URL answers with the expected HTTP status</td></tr>
+      <tr><td><code>url_contains</code></td><td data-i18n="t_url_contains">a fetched page body matches a pattern</td></tr>
+      <tr><td><code>file_exists</code></td><td data-i18n="t_file_exists">a file exists under the base dir (CLI)</td></tr>
+      <tr><td><code>file_sha256</code></td><td data-i18n="t_file_sha256">a file's bytes match an expected hash (CLI)</td></tr>
+      <tr><td><code>file_regex</code></td><td data-i18n="t_file_regex">a file's content matches a pattern (CLI)</td></tr>
+      <tr><td><code>json_field</code></td><td data-i18n="t_json_field">a JSON field equals an expected value (CLI)</td></tr>
+      <tr><td><code>count_match</code></td><td data-i18n="t_count_match">a pattern occurs at least N times in a file (CLI)</td></tr>
+    </table>
+    <p class="muted">Schemas: <a href="schema/task-verdict.schema.json"><code>cwi.task-verdict/1.0</code></a> ·
+    <a href="schema/verdict-record.schema.json"><code>cwi.task-verdict-record/1.0</code></a> ·
+    engine <a href="verdict.js"><code>verdict.js</code></a> (zero-dependency UMD) ·
+    <a href="https://github.com/CumulativeWebInc/cwi-task-verdict">repo</a></p>
+  </section>
+</main>
+
+<footer>
+  <span data-i18n="footer">CWI Agent Deck #39 · Task Verdict v1.0.0 · receipts over assertions</span>
+</footer>
+
+<script src="verdict.js"></script>
+<script>
+(function () {
+  'use strict';
+  var TV = window.TaskVerdict;
+
+  /* ---------- i18n hook: English table in-page; cwi-i18n drops in the other five ---------- */
+  var I18N = { en: {} };
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    I18N.en[el.getAttribute('data-i18n')] = el.innerHTML;
+  });
+  function t(key) { return (I18N.en[key] !== undefined) ? I18N.en[key] : key; }
+  function setLang(lang) {
+    var table = I18N[lang] || I18N.en;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (table[k] !== undefined) el.innerHTML = table[k];
+    });
+    document.documentElement.lang = lang;
+  }
+  window.TaskVerdictI18N = { tables: I18N, setLang: setLang, t: t };
+
+  /* ---------- tabs ---------- */
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.classList.remove('active'); });
+      tab.classList.add('active');
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      document.getElementById('tab-' + tab.getAttribute('data-tab')).classList.add('active');
+    });
+  });
+
+  /* ---------- manifest editor ---------- */
+  var input = document.getElementById('manifestInput');
+  var msg = document.getElementById('manifestMsg');
+
+  var URL_TPL = { id: 'page-200', type: 'url_status', label: 'Live page serves', url: 'https://example.com/', expect: 200 };
+  var FILE_TPL = { id: 'readme-mentions', type: 'file_regex', label: 'README documents the schema', path: 'README.md', pattern: 'cwi\\.task-verdict' };
+
+  function baseManifest() {
+    return { schema: TV.SCHEMA_MANIFEST, task_id: 'tv_' + Date.now().toString(36), title: '', claim: '', claimed_by: '', checks: [] };
+  }
+  function currentText() { return input.value.trim(); }
+  function setManifest(obj) { input.value = JSON.stringify(obj, null, 2); }
+
+  if (!currentText()) setManifest(baseManifest());
+
+  document.getElementById('btnTemplateUrl').addEventListener('click', function () {
+    try { var m = TV.parseManifest(currentText()); m.checks.push(Object.assign({}, URL_TPL, { id: 'check-' + (m.checks.length + 1) })); setManifest(m); }
+    catch (e) { var m2 = baseManifest(); m2.checks.push(URL_TPL); setManifest(m2); }
+  });
+  document.getElementById('btnTemplateFile').addEventListener('click', function () {
+    try { var m = TV.parseManifest(currentText()); m.checks.push(Object.assign({}, FILE_TPL, { id: 'check-' + (m.checks.length + 1) })); setManifest(m); }
+    catch (e) { var m2 = baseManifest(); m2.checks.push(FILE_TPL); setManifest(m2); }
+  });
+  document.getElementById('btnExample').addEventListener('click', function () {
+    fetch('dogfood/memory-seal.json').then(function (r) { return r.text(); }).then(function (text) {
+      input.value = JSON.stringify(JSON.parse(text), null, 2);
+      say('Dogfood example loaded — 5 live checks against the trust-line products.');
+    }).catch(function () { say('Could not load the example (are you serving this page over http?).'); });
+  });
+  document.getElementById('fileInput').addEventListener('change', function (ev) {
+    var f = ev.target.files[0]; if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function () { input.value = rd.result; say('Loaded ' + f.name); };
+    rd.readAsText(f);
+  });
+
+  function say(text) { msg.textContent = text; }
+
+  document.getElementById('btnValidate').addEventListener('click', function () {
+    try {
+      var m = TV.parseManifest(currentText());
+      say('Valid manifest: ' + m.checks.length + ' check(s), schema ' + m.schema);
+    } catch (e) { say('Invalid: ' + e.message); }
+  });
+
+  /* ---------- run ---------- */
+  var list = document.getElementById('checksList');
+  var card = document.getElementById('verdictCard');
+  var lastRecord = null;
+
+  function statusIcon(s) {
+    return s === 'PASS' ? '✓' : (s === 'FAIL' ? '✗' : '?');
+  }
+
+  function renderRecord(record) {
+    lastRecord = record;
+    card.classList.remove('hidden');
+    var badge = document.getElementById('verdictBadge');
+    badge.textContent = record.verdict;
+    badge.className = 'verdict-badge v-' + record.verdict;
+    document.getElementById('verdictTitle').textContent = record.title || record.task_id;
+    document.getElementById('verdictSub').textContent =
+      record.task_id + ' · ' + record.engine + ' · ' + record.finished_at +
+      (record.claimed_by ? ' · claimed by ' + record.claimed_by : '');
+    var s = record.summary;
+    document.getElementById('verdictCounts').innerHTML =
+      '<span class="c-pass">' + s.pass + ' pass</span> · ' +
+      '<span class="c-fail">' + s.fail + ' fail</span> · ' +
+      '<span class="c-err">' + s.error + ' error</span> · ' +
+      '<span>' + s.total + ' total</span>';
+    list.innerHTML = '';
+    record.checks.forEach(function (r) {
+      var det = document.createElement('details');
+      det.className = 'check ' + r.status.toLowerCase();
+      var sum = document.createElement('summary');
+      sum.innerHTML = '<span class="st">' + statusIcon(r.status) + '</span>' +
+        '<span class="cid">' + escapeHtml(r.id) + '</span>' +
+        '<span class="clabel">' + escapeHtml(checkLabel(r)) + '</span>' +
+        '<span class="ctype">' + escapeHtml(r.type) + '</span>';
+      det.appendChild(sum);
+      var body = document.createElement('div');
+      body.className = 'evidence';
+      body.innerHTML =
+        row('Status', r.status) + row('Target', r.target) +
+        row('Expected', fmt(r.expected)) + row('Observed', fmt(r.observed)) +
+        (r.evidence ? row('Evidence', r.evidence) : '') +
+        (r.error ? row('Error', r.error) : '');
+      det.appendChild(body);
+      list.appendChild(det);
+    });
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  function checkLabel(r) {
+    return r.label || '';
+  }
+  function row(k, v) {
+    return '<div class="erow"><span class="ek">' + escapeHtml(k) + '</span><span class="ev">' + escapeHtml(String(v == null ? '—' : v)) + '</span></div>';
+  }
+  function fmt(v) {
+    if (v === undefined || v === null) return '—';
+    return (typeof v === 'object') ? TV.canonical(v) : String(v);
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  document.getElementById('btnRun').addEventListener('click', async function () {
+    var manifest;
+    try { manifest = TV.parseManifest(currentText()); }
+    catch (e) { say('Invalid: ' + e.message); return; }
+    manifest._started_at = new Date().toISOString();
+    say('Running ' + manifest.checks.length + ' checks…');
+    list.innerHTML = '';
+    card.classList.add('hidden');
+    var results = await TV.runChecks(manifest, TV.browserIO());
+    var record = TV.buildRecord(manifest, results);
+    renderRecord(record);
+    say('Done: ' + record.verdict + ' — ' + record.summary.pass + '/' + record.summary.total + ' passed.');
+    try {
+      history.replaceState(null, '', '?manifest=' + encodeURIComponent(btoa(unescape(encodeURIComponent(currentText())))));
+    } catch (e) { /* URL too long — skip */ }
+  });
+
+  document.getElementById('btnDownload').addEventListener('click', function () {
+    if (!lastRecord) return;
+    var blob = new Blob([JSON.stringify(lastRecord, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (lastRecord.task_id || 'verdict') + '.verdict.json';
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+  });
+  document.getElementById('btnCopyLink').addEventListener('click', function () {
+    var done = function () { say('Share link copied.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(location.href).then(done, done);
+    else done();
+  });
+
+  /* ---------- ?manifest= deep link ---------- */
+  (function () {
+    var m = location.search.match(/[?&]manifest=([^&]+)/);
+    if (!m) return;
+    try {
+      var text = decodeURIComponent(escape(atob(decodeURIComponent(m[1]))));
+      TV.parseManifest(text);
+      input.value = JSON.stringify(JSON.parse(text), null, 2);
+      say('Manifest loaded from share link.');
+    } catch (e) { /* ignore malformed deep links */ }
+  })();
+
+  /* ---------- assemble tab ---------- */
+  var CHECK_DEFS = [
+    { type: 'url_status', fields: ['id', 'label', 'url', 'expect'], hints: { url: 'https://…', expect: '200' } },
+    { type: 'url_contains', fields: ['id', 'label', 'url', 'pattern'], hints: { url: 'https://…', pattern: 'regex' } },
+    { type: 'file_exists', fields: ['id', 'label', 'path'], hints: { path: 'dist/index.html' } },
+    { type: 'file_sha256', fields: ['id', 'label', 'path', 'sha256'], hints: { path: 'dist/app.js', sha256: 'hex…' } },
+    { type: 'file_regex', fields: ['id', 'label', 'path', 'pattern'], hints: { path: 'README.md', pattern: 'regex' } },
+    { type: 'json_field', fields: ['id', 'label', 'path', 'field', 'equals'], hints: { path: 'package.json', field: 'scripts.test', equals: 'JSON value' } },
+    { type: 'count_match', fields: ['id', 'label', 'path', 'pattern', 'min'], hints: { path: 'tests/test.js', pattern: 'regex', min: '10' } }
+  ];
+  var rowsEl = document.getElementById('checkRows');
+  function addCheckRow() {
+    var wrap = document.createElement('div');
+    wrap.className = 'checkrow';
+    var sel = document.createElement('select');
+    CHECK_DEFS.forEach(function (d, i) {
+      var o = document.createElement('option');
+      o.value = i; o.textContent = d.type; sel.appendChild(o);
+    });
+    var fields = document.createElement('div');
+    fields.className = 'checkfields';
+    var del = document.createElement('button');
+    del.textContent = '✕'; del.className = 'del';
+    del.addEventListener('click', function () { wrap.remove(); });
+    function renderFields() {
+      fields.innerHTML = '';
+      var def = CHECK_DEFS[parseInt(sel.value, 10)];
+      def.fields.forEach(function (f) {
+        var lab = document.createElement('label');
+        var sp = document.createElement('span'); sp.textContent = f;
+        var inp = document.createElement('input');
+        inp.setAttribute('data-f', f);
+        inp.placeholder = (def.hints && def.hints[f]) || f;
+        lab.appendChild(sp); lab.appendChild(inp);
+        fields.appendChild(lab);
+      });
+    }
+    sel.addEventListener('change', renderFields);
+    renderFields();
+    wrap.appendChild(sel); wrap.appendChild(fields); wrap.appendChild(del);
+    rowsEl.appendChild(wrap);
+  }
+  document.getElementById('btnAddCheck').addEventListener('click', addCheckRow);
+  addCheckRow();
+
+  document.getElementById('btnBuild').addEventListener('click', function () {
+    var amsg = document.getElementById('assembleMsg');
+    try {
+      var m = {
+        schema: TV.SCHEMA_MANIFEST,
+        task_id: document.getElementById('aTaskId').value.trim() || 'tv_' + Date.now().toString(36),
+        title: document.getElementById('aTitle').value.trim(),
+        claim: document.getElementById('aClaim').value.trim(),
+        claimed_by: document.getElementById('aBy').value.trim(),
+        checks: []
+      };
+      rowsEl.querySelectorAll('.checkrow').forEach(function (wrap, i) {
+        var def = CHECK_DEFS[parseInt(wrap.querySelector('select').value, 10)];
+        var c = { type: def.type };
+        wrap.querySelectorAll('[data-f]').forEach(function (inp) {
+          var f = inp.getAttribute('data-f');
+          var v = inp.value.trim();
+          if (v === '') return;
+          if (f === 'expect' || f === 'min') v = parseInt(v, 10);
+          else if (f === 'equals') { try { v = JSON.parse(v); } catch (e) { /* keep as string */ } }
+          c[f] = v;
+        });
+        if (!c.id) c.id = 'check-' + (i + 1);
+        m.checks.push(c);
+      });
+      TV.parseManifest(m); // validates before accepting
+      setManifest(m);
+      tabs[0].click();
+      say('Manifest built: ' + m.checks.length + ' checks. Validate or run it.');
+    } catch (e) { amsg.textContent = 'Invalid: ' + e.message; }
+  });
+})();
+</script>
+</body>
+</html>

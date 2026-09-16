@@ -1,0 +1,69 @@
+{
+  "schema": "cwi.task-verdict-record/1.0",
+  "record_id": "tv_01M2NHH0EBYAQ3H62E2NCTPYKJ",
+  "task_id": "tv_dogfood_trust_line_20260916",
+  "title": "Dogfood: trust-line products still serve what they claim",
+  "claimed_by": "KingCode (CWI_Results dogfood)",
+  "verdict": "PASS",
+  "engine": "task-verdict/1.0.0",
+  "started_at": "2026-09-16T16:41:44.369Z",
+  "finished_at": "2026-09-16T16:41:45.163Z",
+  "summary": {
+    "pass": 5,
+    "fail": 0,
+    "error": 0,
+    "total": 5
+  },
+  "checks": [
+    {
+      "id": "ms-page",
+      "type": "url_status",
+      "status": "PASS",
+      "evidence": "HTTP 200 <- https://cumulativewebinc.github.io/cwi-memory-seal/",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-memory-seal/",
+      "expected": 200,
+      "observed": 200
+    },
+    {
+      "id": "ms-engine",
+      "type": "url_status",
+      "status": "PASS",
+      "evidence": "HTTP 200 <- https://cumulativewebinc.github.io/cwi-memory-seal/memory.js",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-memory-seal/memory.js",
+      "expected": 200,
+      "observed": 200
+    },
+    {
+      "id": "ms-schema",
+      "type": "url_contains",
+      "status": "PASS",
+      "evidence": "HTTP 200, 29890 bytes fetched from https://cumulativewebinc.github.io/cwi-memory-seal/memory.js",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-memory-seal/memory.js",
+      "expected": "body matches /cwi\\.memory-checkpoint/1\\.0/",
+      "observed": "pattern found"
+    },
+    {
+      "id": "il-page",
+      "type": "url_status",
+      "status": "PASS",
+      "evidence": "HTTP 200 <- https://cumulativewebinc.github.io/cwi-identity-ledger/",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-identity-ledger/",
+      "expected": 200,
+      "observed": 200
+    },
+    {
+      "id": "il-schema",
+      "type": "url_contains",
+      "status": "PASS",
+      "evidence": "HTTP 200, 13300 bytes fetched from https://cumulativewebinc.github.io/cwi-identity-ledger/",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-identity-ledger/",
+      "expected": "body matches /cwi\\.identity-card/1\\.0/",
+      "observed": "pattern found"
+    }
+  ]
+}

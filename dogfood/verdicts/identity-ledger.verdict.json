@@ -1,0 +1,59 @@
+{
+  "schema": "cwi.task-verdict-record/1.0",
+  "record_id": "tv_01M2NHH14WW4RBHQMD8VFTZGKX",
+  "task_id": "tv_dogfood_identity_line_20260916",
+  "title": "Dogfood: identity-line products still serve",
+  "claimed_by": "KingCode (CWI_Results dogfood)",
+  "verdict": "PASS",
+  "engine": "task-verdict/1.0.0",
+  "started_at": "2026-09-16T16:41:45.267Z",
+  "finished_at": "2026-09-16T16:41:45.884Z",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "error": 0,
+    "total": 4
+  },
+  "checks": [
+    {
+      "id": "il-page",
+      "type": "url_status",
+      "status": "PASS",
+      "evidence": "HTTP 200 <- https://cumulativewebinc.github.io/cwi-identity-ledger/",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-identity-ledger/",
+      "expected": 200,
+      "observed": 200
+    },
+    {
+      "id": "il-engine",
+      "type": "url_status",
+      "status": "PASS",
+      "evidence": "HTTP 200 <- https://cumulativewebinc.github.io/cwi-identity-ledger/identity.js",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-identity-ledger/identity.js",
+      "expected": 200,
+      "observed": 200
+    },
+    {
+      "id": "il-schema",
+      "type": "url_contains",
+      "status": "PASS",
+      "evidence": "HTTP 200, 18281 bytes fetched from https://cumulativewebinc.github.io/cwi-identity-ledger/identity.js",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-identity-ledger/identity.js",
+      "expected": "body matches /cwi\\.identity-card/1\\.0/",
+      "observed": "pattern found"
+    },
+    {
+      "id": "tl-page",
+      "type": "url_status",
+      "status": "PASS",
+      "evidence": "HTTP 200 <- https://cumulativewebinc.github.io/cwi-trust-log/",
+      "error": null,
+      "target": "https://cumulativewebinc.github.io/cwi-trust-log/",
+      "expected": 200,
+      "observed": 200
+    }
+  ]
+}

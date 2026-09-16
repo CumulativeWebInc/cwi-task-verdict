@@ -1,0 +1,1 @@
+{"description":"CWI Task Verdict — orchestration receipts: evidence-bound checks over delegated tasks, machine-readable verdict records","license":"UNLICENSED","name":"cwi-task-verdict","private":true,"scripts":{"test":"node --test tests/test.js","verify":"node cli/verify.js"},"version":"1.0.0"}
