@@ -1,0 +1,99 @@
+{
+  "schema": "cwi.task-verdict-record/1.0",
+  "record_id": "tv_01M2NHH17HTC4AE28YWZMDYWSV",
+  "task_id": "tv_dogfood_self_local_20260916",
+  "title": "Dogfood: Task Verdict's own ship checklist (local files)",
+  "claimed_by": "KingCode (CWI_Results dogfood)",
+  "verdict": "PASS",
+  "engine": "task-verdict/1.0.0",
+  "started_at": "2026-09-16T16:41:45.968Z",
+  "finished_at": "2026-09-16T16:41:45.969Z",
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "error": 0,
+    "total": 8
+  },
+  "checks": [
+    {
+      "id": "f-engine",
+      "type": "file_exists",
+      "status": "PASS",
+      "evidence": "verdict.js readable",
+      "error": null,
+      "target": "verdict.js",
+      "expected": "file exists",
+      "observed": "exists"
+    },
+    {
+      "id": "f-cli",
+      "type": "file_exists",
+      "status": "PASS",
+      "evidence": "cli/verify.js readable",
+      "error": null,
+      "target": "cli/verify.js",
+      "expected": "file exists",
+      "observed": "exists"
+    },
+    {
+      "id": "f-ui",
+      "type": "file_exists",
+      "status": "PASS",
+      "evidence": "index.html readable",
+      "error": null,
+      "target": "index.html",
+      "expected": "file exists",
+      "observed": "exists"
+    },
+    {
+      "id": "f-tests",
+      "type": "file_exists",
+      "status": "PASS",
+      "evidence": "tests/test.js readable",
+      "error": null,
+      "target": "tests/test.js",
+      "expected": "file exists",
+      "observed": "exists"
+    },
+    {
+      "id": "f-readme",
+      "type": "file_exists",
+      "status": "PASS",
+      "evidence": "README.md readable",
+      "error": null,
+      "target": "README.md",
+      "expected": "file exists",
+      "observed": "exists"
+    },
+    {
+      "id": "t-count",
+      "type": "count_match",
+      "status": "PASS",
+      "evidence": "tests/test.js (14327 chars read)",
+      "error": null,
+      "target": "tests/test.js",
+      "expected": "at least 30 matches of /test\\('/",
+      "observed": "38 matches"
+    },
+    {
+      "id": "t-script",
+      "type": "json_field",
+      "status": "PASS",
+      "evidence": "package.json parsed (296 chars)",
+      "error": null,
+      "target": "package.json#scripts.test",
+      "expected": "field scripts.test equals \"node --test tests/test.js\"",
+      "observed": "\"node --test tests/test.js\""
+    },
+    {
+      "id": "r-schema",
+      "type": "file_regex",
+      "status": "PASS",
+      "evidence": "README.md (4093 chars read)",
+      "error": null,
+      "target": "README.md",
+      "expected": "content matches /cwi\\.task-verdict/1\\.0/",
+      "observed": "pattern found"
+    }
+  ]
+}
