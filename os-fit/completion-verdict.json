@@ -1,0 +1,9 @@
+{
+ "ok": false,
+ "project": "retrofit-cwi-task-verdict",
+ "classification": "INCOMPLETE",
+ "missing": [
+  "metrics-exist: gate not passed",
+  "monitoring-exists: gate not passed"
+ ]
+}
