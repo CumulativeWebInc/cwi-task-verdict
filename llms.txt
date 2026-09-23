@@ -1,0 +1,23 @@
+# Task Verdict — Orchestration receipts for delegated work (for AI agents)
+
+Turn any delegated task's claims into checkable evidence: write a manifest of evidence-bound checks, run it, get PASS / FAIL / PARTIAL — computed from evidence, never from the subagent's prose.
+
+Live: https://cumulativewebinc.github.io/cwi-task-verdict/
+Operator: Cumulative Web Inc (Agent Deck SKU #39)
+
+## Machine-readable
+
+- `cli`: cli/verify.js (exit 0/2/3/1)
+- `dogfood`: dogfood/ (3 real manifests, all PASS)
+- `engine`: verdict.js (zero-dep UMD, byte-identical served)
+- `schemas`: schema/task-verdict.schema.json (manifest), schema/verdict-record.schema.json (receipt)
+
+## Honest limits
+
+PASS proves the listed checks passed at run time — not that the task was good. Unverifiable is reported as PARTIAL, never rounded up to a pass.
+
+## Use it
+
+Write the checks before delegating, run them after. 7 check types: URL status/content, file exists/sha256/regex, JSON fields, pattern counts — with timeouts and base-dir sandboxing.
+
+Contact: hp@cumulativeweb.com · Source: https://github.com/CumulativeWebInc/cwi-task-verdict
