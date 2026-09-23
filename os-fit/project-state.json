@@ -12,6 +12,7 @@
  ],
  "theorem": "INCOMPLETE",
  "missing_gates": [
+  "results-independently-verified: gate not passed",
   "metrics-exist: gate not passed",
   "monitoring-exists: gate not passed"
  ],
