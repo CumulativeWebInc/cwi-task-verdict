@@ -1,0 +1,18 @@
+{
+ "project": "retrofit-cwi-task-verdict",
+ "name": "Task Verdict",
+ "sku": "Agent Deck SKU #39",
+ "url": "https://cumulativewebinc.github.io/cwi-task-verdict/",
+ "retrofit_date": "2026-09-23",
+ "tests": "39/39 (node --test tests/test.js; live local HTTP server + CLI subprocesses)",
+ "invariants": [
+  "verdict.js v1.0.0 byte-identical served \u2014 keep byte-identity (sha256 6d7cdece\u2026)",
+  "?manifest= deep links keep working",
+  "7 check types; exit codes 0 PASS / 2 FAIL / 3 PARTIAL / 1 usage"
+ ],
+ "theorem": "INCOMPLETE",
+ "missing_gates": [
+  "metrics-exist: gate not passed",
+  "monitoring-exists: gate not passed"
+ ]
+}
