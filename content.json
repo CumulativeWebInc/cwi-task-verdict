@@ -1,0 +1,35 @@
+{
+ "schema_version": "cwi.content-index/1.0",
+ "content": "cwi.content-index/1.0",
+ "name": "Task Verdict",
+ "day": "2026-09-23",
+ "id": "retrofit-cwi-task-verdict",
+ "type": "interactive_tool",
+ "url": "https://cumulativewebinc.github.io/cwi-task-verdict/",
+ "description": "Turn any delegated task's claims into checkable evidence: write a manifest of evidence-bound checks, run it, get PASS / FAIL / PARTIAL \u2014 computed from evidence, never from the subagent's prose.",
+ "tagline": "Orchestration receipts for delegated work",
+ "operator": "Cumulative Web Inc",
+ "sku": "Agent Deck SKU #39",
+ "media_files": [
+  "brand/cwi-logo.jpg"
+ ],
+ "caption": "Task Verdict \u2014 Orchestration receipts for delegated work. Write the checks before delegating, run them after. 7 check types: URL status/content, file exists/sha256/regex, JSON fields, pattern counts \u2014 with timeouts and base-dir sandboxing.",
+ "hashtags": [
+  "#CumulativeWebInc",
+  "#AgentDeck",
+  "#AIAgents"
+ ],
+ "cta": "Stop trusting subagent prose",
+ "try_link": "https://cumulativewebinc.github.io/cwi-task-verdict/",
+ "machine_readable": {
+  "cli": "cli/verify.js (exit 0/2/3/1)",
+  "dogfood": "dogfood/ (3 real manifests, all PASS)",
+  "engine": "verdict.js (zero-dep UMD, byte-identical served)",
+  "schemas": "schema/task-verdict.schema.json (manifest), schema/verdict-record.schema.json (receipt)"
+ },
+ "honest_limits": "PASS proves the listed checks passed at run time \u2014 not that the task was good. Unverifiable is reported as PARTIAL, never rounded up to a pass.",
+ "platform_targets": [
+  "github-pages"
+ ],
+ "contact": "hp@cumulativeweb.com"
+}
