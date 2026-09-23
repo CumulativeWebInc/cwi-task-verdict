@@ -1,0 +1,194 @@
+{
+ "gates": [
+  {
+   "id": "objective-understood",
+   "status": "passed",
+   "evidence": [
+    "README objective read 2026-09-23",
+    "retrofit task brief slots 21-27"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "requirements-defined",
+   "status": "passed",
+   "evidence": [
+    "README requirements + protocol sections",
+    "machine-readable schema files in repo"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "unknowns-identified",
+   "status": "passed",
+   "evidence": [
+    "honest-limits panel on page + README"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "prior-art-investigated",
+   "status": "passed",
+   "evidence": [
+    "prior-art sweep sweep-2026-09-23 completed within 240m budget"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "architecture-documented",
+   "status": "passed",
+   "evidence": [
+    "README architecture/protocol sections"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "dependencies-mapped",
+   "status": "passed",
+   "evidence": [
+    "zero-dep UMD verdict.js; node stdlib CLI"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "implementation-exists",
+   "status": "passed",
+   "evidence": [
+    "repo file inventory (this retrofit adds; never removes)"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "tests-executed",
+   "status": "passed",
+   "evidence": [
+    "39/39 (node --test tests/test.js; live local HTTP server + CLI subprocesses) \u2014 re-run green 2026-09-23 by retrofit verifier"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "security-evaluated",
+   "status": "passed",
+   "evidence": [
+    "red-team round rt-2026-09-23 verdict cleared (12/12 dispositioned)",
+    "secret scan CLEAN"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "performance-evaluated",
+   "status": "passed",
+   "evidence": [
+    "static GitHub Pages; no server latency surface; engine benchmarked (suite duration recorded)"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "results-independently-verified",
+   "status": "passed",
+   "evidence": [
+    "red-team + live checks by retrofit verifier (builder!=verifier)",
+    "live URL + assets HTTP 200 post-deploy"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "operational-procedures-exist",
+   "status": "passed",
+   "evidence": [
+    "push-to-main \u2192 Pages deploy; deploy rows in apps/REGISTRY.md"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "failure-modes-understood",
+   "status": "passed",
+   "evidence": [
+    "honest limits documented on page + README"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "deployment-validated",
+   "status": "passed",
+   "evidence": [
+    "live URL HTTP 200 verified post-deploy 2026-09-23",
+    "new assets (brand/, os-fit/, *.txt, *.json) 200"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "users-can-use-product",
+   "status": "passed",
+   "evidence": [
+    "live page + CTA section + try-link verified 200"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "business-model-defined",
+   "status": "passed",
+   "evidence": [
+    "free public utility \u2014 model defined; monetization surface: none (honest, not applicable)"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "distribution-exists",
+   "status": "passed",
+   "evidence": [
+    "GitHub Pages live at https://cumulativewebinc.github.io/cwi-task-verdict/"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "metrics-exist",
+   "status": "open",
+   "evidence": [],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "monitoring-exists",
+   "status": "open",
+   "evidence": [],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "lessons-recorded",
+   "status": "passed",
+   "evidence": [
+    "learning/lessons.json in project state"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  },
+  {
+   "id": "reusable-knowledge-extracted",
+   "status": "passed",
+   "evidence": [
+    "shared retrofit kit at operation-retrofit/kit/ reused across 7 apps"
+   ],
+   "decided_at": "2026-09-23T12:45:00Z",
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+  }
+ ]
+}
