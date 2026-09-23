@@ -1,0 +1,70 @@
+{
+ "id": "rt-2026-09-23",
+ "target": "Task Verdict OS retrofit (https://cumulativewebinc.github.io/cwi-task-verdict/)",
+ "attacker_urn": "urn:cwi:agent:retrofit-wave2-worker",
+ "started_at": "2026-09-23T12:00:00Z",
+ "completed_at": "2026-09-23T12:30:00Z",
+ "verdict": "cleared",
+ "checklist": [
+  {
+   "item": "failure-modes",
+   "disposition": "passed",
+   "finding": "fetch timeouts yield ERROR not hangs; PARTIAL never rounded to PASS"
+  },
+  {
+   "item": "exploit-vectors",
+   "disposition": "mitigated",
+   "finding": "CLI file checks sandboxed to base dir; path traversal rejected; browser checks same-origin/CORS-limited"
+  },
+  {
+   "item": "weakest-assumption",
+   "disposition": "mitigated",
+   "finding": "PASS proves listed checks passed at runtime, not task quality \u2014 labeled on honest-limits tab"
+  },
+  {
+   "item": "scale-10x",
+   "disposition": "passed",
+   "finding": "checks are independent; linear"
+  },
+  {
+   "item": "scale-100x",
+   "disposition": "passed",
+   "finding": "no server; manifests are local"
+  },
+  {
+   "item": "api-disappearance",
+   "disposition": "passed",
+   "finding": "no external API dependency for file/json checks; URL checks degrade to PARTIAL"
+  },
+  {
+   "item": "data-corruption",
+   "disposition": "passed",
+   "finding": "file_sha256 check type exists; verdict records canonical JSON"
+  },
+  {
+   "item": "unexpected-users",
+   "disposition": "passed",
+   "finding": "Assemble tab builds manifests without hand-writing JSON"
+  },
+  {
+   "item": "credential-leak",
+   "disposition": "passed",
+   "finding": "manifests user-supplied; no secrets in repo; secret scan clean"
+  },
+  {
+   "item": "hallucination",
+   "disposition": "passed",
+   "finding": "verdicts computed from evidence; subagent prose is not an input"
+  },
+  {
+   "item": "malicious-instructions",
+   "disposition": "passed",
+   "finding": "manifest is data not instructions; regex fields bounded"
+  },
+  {
+   "item": "memory-poisoning",
+   "disposition": "passed",
+   "finding": "no memory surface"
+  }
+ ]
+}
