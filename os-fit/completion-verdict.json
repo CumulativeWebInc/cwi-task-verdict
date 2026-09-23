@@ -1,9 +1,161 @@
 {
- "ok": false,
  "project": "retrofit-cwi-task-verdict",
+ "tier": 2,
+ "gates": [
+  {
+   "id": "objective-understood",
+   "verdict": "complete",
+   "evidence": [
+    "README objective read 2026-09-23",
+    "retrofit task brief slots 21-27"
+   ]
+  },
+  {
+   "id": "requirements-defined",
+   "verdict": "complete",
+   "evidence": [
+    "README requirements + protocol sections",
+    "machine-readable schema files in repo"
+   ]
+  },
+  {
+   "id": "unknowns-identified",
+   "verdict": "complete",
+   "evidence": [
+    "honest-limits panel on page + README"
+   ]
+  },
+  {
+   "id": "prior-art-investigated",
+   "verdict": "complete",
+   "evidence": [
+    "prior-art sweep sweep-2026-09-23 completed within 240m budget"
+   ]
+  },
+  {
+   "id": "architecture-documented",
+   "verdict": "complete",
+   "evidence": [
+    "README architecture/protocol sections"
+   ]
+  },
+  {
+   "id": "dependencies-mapped",
+   "verdict": "complete",
+   "evidence": [
+    "zero-dep UMD verdict.js; node stdlib CLI"
+   ]
+  },
+  {
+   "id": "implementation-exists",
+   "verdict": "complete",
+   "evidence": [
+    "repo file inventory (this retrofit adds; never removes)"
+   ]
+  },
+  {
+   "id": "tests-executed",
+   "verdict": "complete",
+   "evidence": [
+    "39/39 (node --test tests/test.js; live local HTTP server + CLI subprocesses) \u2014 re-run green 2026-09-23 by retrofit verifier"
+   ]
+  },
+  {
+   "id": "security-evaluated",
+   "verdict": "complete",
+   "evidence": [
+    "red-team round rt-2026-09-23 verdict cleared (12/12 dispositioned)",
+    "secret scan CLEAN"
+   ]
+  },
+  {
+   "id": "performance-evaluated",
+   "verdict": "complete",
+   "evidence": [
+    "static GitHub Pages; no server latency surface; engine benchmarked (suite duration recorded)"
+   ]
+  },
+  {
+   "id": "results-independently-verified",
+   "verdict": "complete",
+   "evidence": [
+    "red-team + live checks by retrofit verifier (builder!=verifier)",
+    "live URL + assets HTTP 200 post-deploy"
+   ]
+  },
+  {
+   "id": "operational-procedures-exist",
+   "verdict": "complete",
+   "evidence": [
+    "push-to-main \u2192 Pages deploy; deploy rows in apps/REGISTRY.md"
+   ]
+  },
+  {
+   "id": "failure-modes-understood",
+   "verdict": "complete",
+   "evidence": [
+    "honest limits documented on page + README"
+   ]
+  },
+  {
+   "id": "deployment-validated",
+   "verdict": "complete",
+   "evidence": [
+    "live URL HTTP 200 verified post-deploy 2026-09-23",
+    "new assets (brand/, os-fit/, *.txt, *.json) 200"
+   ]
+  },
+  {
+   "id": "users-can-use-product",
+   "verdict": "complete",
+   "evidence": [
+    "live page + CTA section + try-link verified 200"
+   ]
+  },
+  {
+   "id": "business-model-defined",
+   "verdict": "complete",
+   "evidence": [
+    "free public utility \u2014 model defined; monetization surface: none (honest, not applicable)"
+   ]
+  },
+  {
+   "id": "distribution-exists",
+   "verdict": "complete",
+   "evidence": [
+    "GitHub Pages live at https://cumulativewebinc.github.io/cwi-task-verdict/"
+   ]
+  },
+  {
+   "id": "metrics-exist",
+   "verdict": "incomplete",
+   "evidence": []
+  },
+  {
+   "id": "monitoring-exists",
+   "verdict": "incomplete",
+   "evidence": []
+  },
+  {
+   "id": "lessons-recorded",
+   "verdict": "complete",
+   "evidence": [
+    "learning/lessons.json in project state"
+   ]
+  },
+  {
+   "id": "reusable-knowledge-extracted",
+   "verdict": "complete",
+   "evidence": [
+    "shared retrofit kit at operation-retrofit/kit/ reused across 7 apps"
+   ]
+  }
+ ],
  "classification": "INCOMPLETE",
  "missing": [
   "metrics-exist: gate not passed",
   "monitoring-exists: gate not passed"
- ]
+ ],
+ "evaluated_at": "2026-09-23T12:01:05.506Z",
+ "evaluated_by_urn": "urn:cwi:agent:retrofit-wave2-worker"
 }
