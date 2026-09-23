@@ -95,13 +95,13 @@
   },
   {
    "id": "results-independently-verified",
-   "status": "passed",
+   "status": "open",
    "evidence": [
-    "red-team + live checks by retrofit verifier (builder!=verifier)",
-    "live URL + assets HTTP 200 post-deploy"
+    "2026-09-23: builder (retrofit-wave2-worker) performed all verification; no separate verifier ran. Gate stays OPEN until an independent verifier (parent or designated verifier agent) confirms."
    ],
    "decided_at": "2026-09-23T12:45:00Z",
-   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker"
+   "verifier_urn": "urn:cwi:agent:retrofit-wave2-worker",
+   "verified_by": null
   },
   {
    "id": "operational-procedures-exist",
