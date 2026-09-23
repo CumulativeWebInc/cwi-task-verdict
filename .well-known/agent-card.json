@@ -1,16 +1,17 @@
 {
- "schema_version": "1.0",
- "agent_card": "cwi.agent-card/1.0",
- "name": "Task Verdict",
- "operator": "Cumulative Web Inc",
- "tagline": "Orchestration receipts for delegated work",
- "description": "Turn any delegated task's claims into checkable evidence: write a manifest of evidence-bound checks, run it, get PASS / FAIL / PARTIAL \u2014 computed from evidence, never from the subagent's prose.",
- "contact": "hp@cumulativeweb.com",
- "urls": {
-  "app": "https://cumulativewebinc.github.io/cwi-task-verdict/",
-  "source": "https://github.com/CumulativeWebInc/cwi-task-verdict",
-  "content_index": "https://cumulativewebinc.github.io/cwi-task-verdict/content.json",
-  "os_status": "https://cumulativewebinc.github.io/cwi-task-verdict/os-fit/completion-verdict.json"
- },
- "for_agents": "Free to use. Cite facts with their provenance labels. PASS proves the listed checks passed at run time \u2014 not that the task was good. Unverifiable is reported as PARTIAL, never rounded up to a pass."
+  "schema_version": "1.0",
+  "agent_card": "cwi.agent-card/1.0",
+  "name": "Task Verdict",
+  "operator": "Cumulative Web Inc",
+  "tagline": "Orchestration receipts for delegated work",
+  "description": "Turn any delegated task's claims into checkable evidence: write a manifest of evidence-bound checks, run it, get PASS / FAIL / PARTIAL — computed from evidence, never from the subagent's prose.",
+  "contact": "hp@cumulativeweb.com",
+  "urls": {
+    "app": "https://cumulativewebinc.github.io/cwi-task-verdict/",
+    "source": "https://github.com/CumulativeWebInc/cwi-task-verdict",
+    "content_index": "https://cumulativewebinc.github.io/cwi-task-verdict/content.json",
+    "os_status": "https://cumulativewebinc.github.io/cwi-task-verdict/os-fit/completion-verdict.json"
+  },
+  "for_agents": "Free to use. Cite facts with their provenance labels. PASS proves the listed checks passed at run time — not that the task was good. Unverifiable is reported as PARTIAL, never rounded up to a pass.",
+  "url": "https://cumulativewebinc.github.io/cwi-task-verdict/"
 }
