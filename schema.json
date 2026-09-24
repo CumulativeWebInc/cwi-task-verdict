@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Task Verdict (#39)",
+  "url": "https://cumulativewebinc.github.io/cwi-task-verdict/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "author": {
+    "@type": "Organization",
+    "name": "Cumulative Web Inc",
+    "url": "https://cumulativeweb.com/"
+  },
+  "description": "Orchestration receipts with evidence-bound checks over delegated tasks; zero-dependency verdict.js engine."
+}
