@@ -10,5 +10,6 @@
     "name": "Cumulative Web Inc",
     "url": "https://cumulativeweb.com/"
   },
-  "description": "Orchestration receipts with evidence-bound checks over delegated tasks; zero-dependency verdict.js engine."
+  "description": "Orchestration receipts with evidence-bound checks over delegated tasks; zero-dependency verdict.js engine.",
+  "schema_version": "1.0.0"
 }
